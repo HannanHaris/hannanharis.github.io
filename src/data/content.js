@@ -60,7 +60,7 @@ export const experience = [
     company: "Raja Abdullah E-commerce Stores",
     role: "Technical Consultant & Virtual Assistant",
     place: "United Kingdom, remote",
-    period: "July 2023 - January 2025",
+    period: "July 2023 - January 2024",
     points: [
       "Advised on cloud hosting and managed Amazon and Shopify listings with SEO work that lifted organic traffic by 30%.",
       "Automated repeat admin tasks with Python scripts to cut manual workload.",
