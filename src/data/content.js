@@ -3,7 +3,7 @@
 
 export const profile = {
   name: "Muhammad Hannan Haris",
-  role: "Cloud & AI Automation Engineer",
+  role: "Senior Cloud Engineer",
   tagline: "AWS Certified Solutions Architect",
   location: "Faisalabad, Pakistan",
   availability: "Open to new work, on site or remote",
@@ -13,57 +13,54 @@ export const profile = {
   phone: "+92 312 7621382",
   linkedin: "https://www.linkedin.com/in/hannan-haris-221a26208",
   linkedinLabel: "/in/hannan-haris-221a26208",
-  github: "", // add your GitHub URL here and the link appears automatically
+  github: "https://github.com/HannanHaris",
   resumeFile: "/Hannan_Haris_Resume.pdf",
   avatar: "/avatar.png", // drop your picture or cartoon avatar in the public folder
 };
 
 export const metrics = [
-  { value: 25, prefix: "-", suffix: "%", label: "AWS operational cost", note: "reserved and spot instances, autoscaling, right sizing" },
+  { value: 22, prefix: "-", suffix: "%", label: "AWS compute cost", note: "reserved and spot instances, autoscaling, right sizing" },
   { value: 99.9, suffix: "%", label: "uptime SLA held", note: "CloudWatch and CloudTrail alarm coverage", decimals: 1 },
-  { value: 5, suffix: " TB+", label: "MySQL migrated to RDS", note: "zero data loss, 2 hour cutover" },
-  { value: 70, prefix: "-", suffix: "%", label: "incident response time", note: "Lambda based automated remediation" },
+  { value: 400, suffix: " GB", label: "MySQL migrated to RDS", note: "zero data loss via AWS DMS, minimal downtime" },
+  { value: 150, suffix: "K+", label: "daily requests served", note: "three tier, multi AZ AWS architecture" },
 ];
 
 export const experience = [
   {
     company: "Puffersoft (Pvt) Ltd",
-    role: "Cloud & AI Automation Engineer",
+    role: "Senior Cloud Engineer",
     place: "Faisalabad, Pakistan",
     period: "March 2024 - Present",
     current: true,
     points: [
-      "Cut AWS operational cost by 25% using reserved and spot instances, autoscaling policies and resource right sizing across EC2, RDS and S3.",
+      "Designed and deployed a secure three tier AWS architecture with public and private subnets across multiple availability zones, Application Load Balancers, NAT gateways and layered security groups and NACLs, serving around 150,000 user requests a day.",
+      "Built a scalable file upload and download system on S3 with multipart uploads and pre signed URLs behind CloudFront, handling files up to 5 GB and about 2,000 uploads a day.",
+      "Cut monthly AWS compute cost by 22% with reserved and spot instances and dynamic auto scaling across EC2 and RDS.",
       "Built the monitoring layer in CloudWatch and CloudTrail with dynamic alarms that fix problems on their own. An instance nearing its IOPS or throughput limit triggers a Lambda that raises both before the workload degrades, and emails the team through SNS. This is a large part of how the 99.9% uptime SLA held.",
-      "Converted all monitoring, networking and compute configuration to Terraform so any environment can be rebuilt the same way every time.",
+      "Automated detection and blocking of suspicious traffic with AWS WAF and GuardDuty, with EventBridge and Lambda for remediation, cutting incident response from 45 minutes to near real time.",
+      "Converted all monitoring, networking and compute configuration to Terraform so any environment can be rebuilt the same way every time, and moved every hardcoded credential into AWS Secrets Manager to meet SOC 2 and ISO 27001 requirements.",
       "Deployed a production Kubernetes cluster on AWS EKS with the Load Balancer Controller, autoscaling and high availability for containerized services.",
       "Set up backup and disaster recovery with AWS DRS, reaching a 15 minute RPO and 1 hour RTO on critical systems.",
-      "Led the migration of 5TB+ on premises MySQL databases to AWS RDS with zero data loss, 2 hours of downtime and 40% faster queries.",
+      "Led the migration of a 400 GB production MySQL database to AWS RDS with AWS DMS, zero data loss and minimal downtime.",
+      "Built CI/CD pipelines in GitHub Actions that run tests and linting, build Docker images and block any deploy that fails a test.",
       "Designed OpenVPN infrastructure with MFA for encrypted remote access for 50+ team members.",
-      "Moved every hardcoded credential into AWS Secrets Manager to meet SOC 2 and ISO 27001 requirements.",
-      "Added Azure Application Gateway with WAF against OWASP Top 10 threats, and automated Azure VM provisioning with ARM templates and Azure DevOps to cut deployment time by 40%.",
+      "Deployed Alibaba Cloud ECS instances with Docker Compose to host self hosted tools including n8n, PostgreSQL, pgvector, OpenWebUI and NocoDB, and added Azure Application Gateway with WAF against OWASP Top 10 threats.",
       "Shipped client facing n8n automation: CV shortlisting, multi tier document approval, an employee request portal, social content publishing, invoice conversion and a RAG support chatbot.",
       "Mentored 3 junior cloud engineers on AWS practice, Terraform and troubleshooting.",
     ],
   },
   {
-    company: "Puffersoft (Pvt) Ltd",
-    role: "Cloud Engineering Intern",
-    place: "Faisalabad, Pakistan",
-    period: "January 2024 - March 2024",
+    company: "A.R Data Science",
+    role: "Data Scientist (Part time, Remote)",
+    place: "Faisalabad, Pakistan, remote",
+    period: "June 2024 - January 2026",
     points: [
-      "Completed intensive AWS training on core services, architecture patterns and operational practice.",
-      "Helped migrate legacy applications to EC2, S3, RDS and VPC, and automated the setup with Terraform and Ansible.",
-    ],
-  },
-  {
-    company: "Raja Abdullah E-commerce Stores",
-    role: "Technical Consultant & Virtual Assistant",
-    place: "United Kingdom, remote",
-    period: "July 2023 - January 2024",
-    points: [
-      "Advised on cloud hosting and managed Amazon and Shopify listings with SEO work that lifted organic traffic by 30%.",
-      "Automated repeat admin tasks with Python scripts to cut manual workload.",
+      "Built and cleaned high quality datasets for large language models, used for training, testing and improving model performance.",
+      "Designed agentic tasks that helped models reason better and make more accurate decisions.",
+      "Reviewed and validated AI generated outputs to keep data quality high and aligned with each project goal.",
+      "Used machine learning, statistics and NLP for data analysis, feature engineering and dataset tuning, with exploratory data analysis to find patterns, trends and gaps.",
+      "Built automated data pipelines to speed up data processing, and helped put data driven parts into production AI systems.",
+      "Worked as a lead and reviewer, guiding junior data scientists and supervising task pipelines, and wrote clear reports and documentation for local and international teams.",
     ],
   },
 ];
@@ -136,17 +133,17 @@ export const projects = [
     summary:
       "Multi availability zone cluster with the AWS Load Balancer Controller, horizontal pod autoscaling, cluster autoscaler and Container Insights.",
     detail:
-      "Lambda based automated remediation brought incident response time down by 70%.",
+      "Lambda based automated remediation keeps services healthy and brings incident response down to near real time.",
     tag: "Cloud infrastructure",
   },
   {
-    name: "5TB Database Migration",
+    name: "400 GB Database Migration",
     kicker: "On premises to AWS RDS",
     stack: ["AWS DMS", "MySQL", "RDS"],
     summary:
-      "End to end migration of 5TB+ of MySQL data using AWS DMS with continuous replication, so the cutover window stayed short and nothing was lost.",
+      "End to end migration of a 400 GB MySQL database using AWS DMS with continuous replication, so the cutover window stayed short and nothing was lost.",
     detail:
-      "Query performance improved 40% and database administration overhead dropped by half.",
+      "Query performance improved and database administration overhead dropped after the move to RDS.",
     tag: "Cloud infrastructure",
   },
 ];
@@ -154,11 +151,11 @@ export const projects = [
 export const skills = [
   {
     group: "Cloud platforms",
-    items: ["AWS EC2", "RDS", "S3", "VPC", "Lambda", "ELB", "Auto Scaling", "Aurora Serverless", "CloudWatch", "CloudTrail", "Secrets Manager", "AWS DRS", "Lightsail", "Azure App Gateway", "Azure WAF", "ARM Templates", "Azure DevOps", "GCP", "Alibaba ECS", "Alibaba OSS"],
+    items: ["AWS EC2", "RDS", "S3", "VPC", "Lambda", "ELB", "Auto Scaling", "Aurora Serverless", "CloudFront", "CloudWatch", "CloudTrail", "Secrets Manager", "AWS DRS", "Lightsail", "Azure App Gateway", "Azure WAF", "ARM Templates", "Azure DevOps", "GCP", "Alibaba ECS", "Alibaba OSS"],
   },
   {
     group: "AI and automation",
-    items: ["n8n", "LangChain", "OpenAI API", "Qwen LLMs", "RAG pipelines", "Milvus", "AI agents", "Prompt engineering"],
+    items: ["n8n", "LangChain", "OpenAI API", "Qwen LLMs", "RAG pipelines", "Milvus", "AI agents", "Prompt engineering", "LLM dataset curation", "NLP", "Exploratory data analysis"],
   },
   {
     group: "DevOps and IaC",
@@ -166,7 +163,7 @@ export const skills = [
   },
   {
     group: "Networking and security",
-    items: ["VPC design", "OpenVPN", "Security groups", "NACLs", "Route 53", "SSL/TLS", "WAF", "IAM", "Zero trust"],
+    items: ["VPC design", "OpenVPN", "Security groups", "NACLs", "Route 53", "SSL/TLS", "WAF", "GuardDuty", "EventBridge", "IAM", "Zero trust"],
   },
   {
     group: "Observability",
