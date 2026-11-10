@@ -3,7 +3,7 @@
 
 export const profile = {
   name: "Muhammad Hannan Haris",
-  role: "Senior Cloud Engineer",
+  role: "Senior Cloud & AI Engineer",
   tagline: "AWS Certified Solutions Architect",
   location: "Faisalabad, Pakistan",
   availability: "Open to new work, on site or remote",
@@ -28,7 +28,7 @@ export const metrics = [
 export const experience = [
   {
     company: "Puffersoft (Pvt) Ltd",
-    role: "Senior Cloud Engineer",
+    role: "Senior Cloud & AI Engineer",
     place: "Faisalabad, Pakistan",
     period: "March 2024 - Present",
     current: true,
