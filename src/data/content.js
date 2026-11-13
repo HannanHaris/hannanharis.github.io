@@ -30,7 +30,8 @@ export const experience = [
     company: "Puffersoft (Pvt) Ltd",
     role: "Senior Cloud & AI Engineer",
     place: "Faisalabad, Pakistan",
-    period: "March 2024 - Present",
+    period: "May 2024 - Present",
+    duration: "2.5 years",
     current: true,
     points: [
       "Designed and deployed a secure three tier AWS architecture with public and private subnets across multiple availability zones, Application Load Balancers, NAT gateways and layered security groups and NACLs, serving around 150,000 user requests a day.",
@@ -45,7 +46,8 @@ export const experience = [
       "Built CI/CD pipelines in GitHub Actions that run tests and linting, build Docker images and block any deploy that fails a test.",
       "Designed OpenVPN infrastructure with MFA for encrypted remote access for 50+ team members.",
       "Deployed Alibaba Cloud ECS instances with Docker Compose to host self hosted tools including n8n, PostgreSQL, pgvector, OpenWebUI and NocoDB, and added Azure Application Gateway with WAF against OWASP Top 10 threats.",
-      "Shipped client facing n8n automation: CV shortlisting, multi tier document approval, an employee request portal, social content publishing, invoice conversion and a RAG support chatbot.",
+      "Designed and automated the deployment of AIXWorkspace.net across AWS and Alibaba Cloud, and built its self service account provisioning: two n8n workflows that take a person from signup form to a working n8n, PostgreSQL, AI gateway, NocoDB and Open WebUI account with one approval click.",
+    "Shipped client facing n8n automation: CV shortlisting, multi tier document approval, an employee request portal, social content publishing, invoice conversion and a RAG support chatbot.",
       "Mentored 3 junior cloud engineers on AWS practice, Terraform and troubleshooting.",
     ],
   },
@@ -66,6 +68,48 @@ export const experience = [
 ];
 
 export const projects = [
+  {
+    name: "AIX Workspace Account Provisioning",
+    kicker: "From signup form to a working workspace",
+    featured: true,
+    link: {
+      href: "https://aixworkspace.net/access-aix-workspace/",
+      label: "Open the live signup page",
+    },
+    summary:
+      "Self service onboarding for AIX Workspace, built as two n8n workflows. A person fills in a form on the website, an admin approves with one click, and a few minutes later they have an n8n login, their own locked down PostgreSQL database, an AI gateway key and ready made credentials. An optional second form adds a vector database, NocoDB and Open WebUI to the same account.",
+    detail:
+      "Two workflows, 46 nodes, and the approval click is the only manual step. Every email goes out in English or Arabic, and every account is logged to a provisioning table that the second workflow reads back.",
+    stages: [
+      {
+        title: "Workflow 1: Signup",
+        meta: "27 nodes",
+        steps: [
+          "A webhook receives the form, validates name, email, account type and organisation, then generates a unique username and a strong password.",
+          "Admins get an approval email and a Discord alert. The request waits up to 24 hours, and a rejection sends the applicant a bilingual reply.",
+          "On approval the n8n user is invited through the API, and a PostgreSQL role and dedicated database are created with public access revoked and CONNECT removed on every other database.",
+          "Monthly usage quotas are set for the user and their organisation from stored defaults.",
+          "The invite is accepted programmatically. The invite token is minted in pure JavaScript because the n8n task runner blocks the crypto module, then the new user is logged in server side.",
+          "A LiteLLM user with a personal API key is created, and Postgres and AI model credentials are injected straight into their n8n personal project.",
+          "A welcome email with the login details goes out, and the account is logged to the NocoDB provisioning table.",
+        ],
+      },
+      {
+        title: "Workflow 2: Advanced access",
+        meta: "19 nodes",
+        steps: [
+          "The user submits only an email. The workflow looks it up in the provisioning table and reads back their existing username.",
+          "No account found: a bilingual email tells them to complete signup first, and nothing else runs.",
+          "Account found: a fresh password is generated and the user is granted a shared pgvector RAG database, with isolation enforced by Row Level Security keyed on their Postgres login.",
+          "A NocoDB base is created for them, a NocoDB user is signed up and invited as creator.",
+          "An Open WebUI user is created and added to the model access group, so models are available on first login.",
+          "The provisioning table is updated and one email delivers every service credential.",
+        ],
+      },
+    ],
+    stack: ["n8n", "PostgreSQL", "pgvector", "Row Level Security", "LiteLLM", "NocoDB", "Open WebUI", "REST APIs", "JavaScript"],
+    tag: "AI automation",
+  },
   {
     name: "DocSign",
     kicker: "Document approval, automated",
@@ -146,6 +190,16 @@ export const projects = [
       "Query performance improved and database administration overhead dropped after the move to RDS.",
     tag: "Cloud infrastructure",
   },
+  {
+    name: "DeepFake Audio Detection System",
+    kicker: "Final year project, BSc Computer Science",
+    stack: ["Python", "Machine Learning", "Audio Signal Processing"],
+    summary:
+      "A machine learning classifier that detects synthetic and manipulated voice recordings.",
+    detail:
+      "Acoustic features are extracted from each recording, and model accuracy is evaluated across spoofed audio datasets.",
+    tag: "Machine learning",
+  },
 ];
 
 export const skills = [
@@ -197,3 +251,15 @@ export const education = {
   year: "May 2024",
   languages: "English, fluent. Urdu, native.",
 };
+
+export const speaking = [
+  {
+    title: "Building Your Career in the Age of AI",
+    role: "Seminar Presenter",
+    event: "FAST-NUCES University",
+    place: "Faisalabad, Pakistan",
+    date: "November 2026",
+    summary:
+      "Represented Puffersoft (Pvt.) Limited to deliver a technical and career guidance session on emerging AI technologies, industry expectations, and practical pathways for engineering students entering the modern tech landscape.",
+  },
+];

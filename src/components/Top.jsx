@@ -43,7 +43,7 @@ export function Nav() {
 const manifest = [
   ['c', "# infrastructure engineer, defined as code"],
   ['k', 'resource "cloud_engineer" "hannan_haris" {'],
-  ['p', '  experience   = "3 years, production"'],
+  ['p', '  experience   = "2.5 years, production"'],
   ['p', '  certified    = "AWS Solutions Architect"'],
   ['p', '  clouds       = ["AWS", "Azure", "GCP"]'],
   ['p', '  builds_with  = ["Terraform", "Kubernetes",'],

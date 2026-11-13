@@ -6,6 +6,7 @@ import {
   skills,
   certifications,
   education,
+  speaking,
 } from "../data/content";
 import { Reveal } from "./Motion";
 
@@ -25,7 +26,7 @@ export function Experience() {
       <Head
         eyebrow="Where I have worked"
         title="Experience"
-        blurb="Two years of running production infrastructure, plus the automation layer built on top of it."
+        blurb="Two and a half years of running production infrastructure, plus the automation layer built on top of it."
       />
       <div className="timeline">
         {experience.map((job, i) => (
@@ -45,7 +46,10 @@ function Job({ job }) {
 
   return (
     <article className={`job ${job.current ? "now" : ""}`}>
-      <div className="job-period">{job.period}</div>
+      <div className="job-period">
+        {job.period}
+        {job.duration && <span className="job-duration">{job.duration}</span>}
+      </div>
       <h3>{job.role}</h3>
       <div className="job-company">
         {job.company} / {job.place}
@@ -99,24 +103,70 @@ export function Projects() {
 
       <div className="proj-grid">
         {shown.map((p, i) => (
-          <Reveal key={p.name} delay={i * 70}>
-            <article className="proj" onMouseMove={track}>
-              <div className="proj-kicker">{p.kicker}</div>
-              <h3>{p.name}</h3>
-              <p>{p.summary}</p>
-              <p className="detail">{p.detail}</p>
-              <div className="chips">
-                {p.stack.map((s) => (
-                  <span className="chip" key={s}>
-                    {s}
-                  </span>
-                ))}
-              </div>
-            </article>
+          <Reveal key={p.name} delay={i * 70} className={p.featured ? "span-all" : ""}>
+            {p.featured ? (
+              <FeaturedProject p={p} track={track} />
+            ) : (
+              <article className="proj" onMouseMove={track}>
+                <div className="proj-kicker">{p.kicker}</div>
+                <h3>{p.name}</h3>
+                <p>{p.summary}</p>
+                <p className="detail">{p.detail}</p>
+                <div className="chips">
+                  {p.stack.map((s) => (
+                    <span className="chip" key={s}>
+                      {s}
+                    </span>
+                  ))}
+                </div>
+              </article>
+            )}
           </Reveal>
         ))}
       </div>
     </section>
+  );
+}
+
+function FeaturedProject({ p, track }) {
+  return (
+    <article className="proj proj-featured" onMouseMove={track}>
+      <div className="proj-kicker">{p.kicker}</div>
+      <h3>{p.name}</h3>
+      <p className="feat-summary">{p.summary}</p>
+      <p className="detail">{p.detail}</p>
+
+      <div className="stage-grid">
+        {p.stages.map((stage) => (
+          <div className="stage" key={stage.title}>
+            <div className="stage-head">
+              <h4>{stage.title}</h4>
+              <span className="mono">{stage.meta}</span>
+            </div>
+            <ol>
+              {stage.steps.map((step) => (
+                <li key={step}>{step}</li>
+              ))}
+            </ol>
+          </div>
+        ))}
+      </div>
+
+      <div className="feat-foot">
+        <div className="chips">
+          {p.stack.map((s) => (
+            <span className="chip" key={s}>
+              {s}
+            </span>
+          ))}
+        </div>
+        {p.link && (
+          <a className="btn btn-ghost" href={p.link.href} target="_blank" rel="noopener noreferrer">
+            {p.link.label}
+          </a>
+        )}
+      </div>
+    </article>
   );
 }
 
@@ -172,6 +222,24 @@ export function Credentials() {
           </div>
         </Reveal>
       </div>
+
+      {speaking.map((t) => (
+        <Reveal key={t.title} delay={160}>
+          <div className="cred-card talk">
+            <h3>Speaking</h3>
+            <div className="talk-main">
+              <div>
+                <p className="degree">{t.title}</p>
+                <p className="degree-meta">
+                  {t.role} / {t.event}, {t.place}
+                </p>
+                <p className="talk-summary">{t.summary}</p>
+              </div>
+              <p className="degree-year mono">{t.date}</p>
+            </div>
+          </div>
+        </Reveal>
+      ))}
     </section>
   );
 }
